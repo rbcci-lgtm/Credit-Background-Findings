@@ -1531,70 +1531,39 @@
     </div>
 
     <div class="shd">Application &amp; Investigation Details</div>
-
-    <!-- ══ INTERVIEW LOOKUP PANEL ══ -->
-    <div id="cbfPanel" style="
-      background:linear-gradient(135deg,rgba(34,96,60,.55),rgba(22,61,40,.8));
-      border:1.5px solid #d4ab12;border-radius:12px;padding:18px 20px;
-      margin-bottom:22px;box-shadow:0 6px 28px rgba(0,0,0,.35);">
-      <div style="font-size:.78rem;font-weight:700;color:#d4ab12;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
-        &#x1F50D; Load from Initial Loan Interview Form
-        <span id="cbfLoaded" style="display:none;background:#1a8a42;color:#fff;font-size:.68rem;padding:2px 10px;border-radius:20px;">&#x2713; Loaded</span>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-        <input id="cbfCodeInput" placeholder="Enter App Code — e.g. RBCCI-2026-A1B2C3"
-          style="flex:1;min-width:220px;padding:10px 14px;border:1.5px solid rgba(212,171,18,.4);border-radius:8px;
-                 background:rgba(0,0,0,.35);color:#fff;font-family:inherit;font-size:.84rem;font-weight:600;
-                 letter-spacing:1px;text-transform:uppercase;" />
-        <button onclick="cbfFetch()" id="cbfFetchBtn"
-          style="padding:10px 20px;background:linear-gradient(135deg,#1d5a30,#27743e);color:#fff;
-                 border:none;border-radius:8px;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;">
-          &#x2B07; Fetch &amp; Load
-        </button>
-        <button onclick="cbfSaveSheets()" id="cbfSaveBtn"
-          style="padding:10px 20px;background:linear-gradient(135deg,#b8960f,#d4ab12);color:#0f3020;
-                 border:none;border-radius:8px;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;">
-          &#x1F4BE; Save to Sheets
-        </button>
-        <span id="cbfStatus" style="font-size:.76rem;font-weight:600;padding:4px 12px;border-radius:20px;display:none;color:#fff;"></span>
-      </div>
-      <div style="margin-top:8px;font-size:.71rem;color:rgba(255,255,255,.4);">
-        &#x2139; Enter the Application Code from the Initial Interview Form. Click Fetch &amp; Load to auto-fill borrower details, then complete the credit findings below and Save to Sheets.
-      </div>
-    </div>
     <div class="fpn">
       <div class="fr">
         <div class="ff w100"><span class="fl">Borrower Name</span>
-          <div class="fb" id="cbfBorrowerName" contenteditable="true"></div>
+          <div class="fb" contenteditable="true"></div>
         </div>
       </div>
       <div class="fr c2">
         <div class="ff"><span class="fl">Application / Reference Number</span>
-          <div class="fb" id="cbfRefNo" contenteditable="true"></div>
+          <div class="fb" contenteditable="true"></div>
         </div>
         <div class="ff"><span class="fl">Date of Background Checking</span>
-          <div class="fb" id="cbfDateCheck" contenteditable="true"></div>
+          <div class="fb" contenteditable="true"></div>
         </div>
       </div>
       <div class="fr c2">
         <div class="ff"><span class="fl">Investigator / Encoder Name</span>
-          <div class="fb" id="cbfInvestigator" contenteditable="true"></div>
+          <div class="fb" contenteditable="true"></div>
         </div>
         <div class="ff"><span class="fl">Branch / Unit</span>
-          <div class="fb" id="cbfBranch" contenteditable="true"></div>
+          <div class="fb" contenteditable="true"></div>
         </div>
       </div>
       <div class="fr c2">
         <div class="ff"><span class="fl">Account / Client Type</span>
-          <div class="fb" id="cbfClientType" contenteditable="true"></div>
+          <div class="fb" contenteditable="true"></div>
         </div>
         <div class="ff"><span class="fl">Overall Credit Background Summary</span>
-          <div class="fb" id="cbfSummary" contenteditable="true"></div>
+          <div class="fb" contenteditable="true"></div>
         </div>
       </div>
       <div class="fr">
         <div class="ff w100"><span class="fl">General Remarks / Findings</span>
-          <div class="fb fb-tall" id="cbfRemarks" contenteditable="true"></div>
+          <div class="fb fb-tall" contenteditable="true"></div>
         </div>
       </div>
       <div class="hdr-sig">
@@ -1744,9 +1713,9 @@
       </svg>
       Print
     </button>
-    <button class="fab" onclick="showCBFReportModal()" style="background:#d97706;color:#fff">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M11 12h2"/>
+    <button class="fab" onclick="showCBFReportModal()" style="background:#d97706;color:#fff;font-weight:700">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
       </svg>
       Generate Report
     </button>
@@ -1759,33 +1728,33 @@
       <div style="text-align:center;margin-bottom:20px">
         <div style="font-size:2rem;margin-bottom:6px">&#x1F4CB;</div>
         <div style="font-size:1.1rem;font-weight:700;color:#071a0e">Generate Credit Background Report</div>
-        <div style="font-size:0.78rem;color:#888;margin-top:4px">Export the complete Credit Background Findings report and upload to Google Drive</div>
+        <div style="font-size:0.78rem;color:#888;margin-top:4px">Export a formal, banking-ready report and upload to Google Drive</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">
         <label style="display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer" id="cbfOptPDF">
           <input type="checkbox" id="cbfChkPDF" checked style="width:18px;height:18px;accent-color:#dc2626;cursor:pointer">
           <div>
             <div style="font-weight:700;color:#dc2626;font-size:0.95rem">&#x1F4C4; PDF Report</div>
-            <div style="font-size:0.75rem;color:#666">Formatted A4 document — ideal for printing and archiving</div>
+            <div style="font-size:0.75rem;color:#666">Formal A4 PDF — ready for printing and archiving</div>
           </div>
         </label>
         <label style="display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer" id="cbfOptWord">
           <input type="checkbox" id="cbfChkWord" checked style="width:18px;height:18px;accent-color:#2563eb;cursor:pointer">
           <div>
             <div style="font-weight:700;color:#2563eb;font-size:0.95rem">&#x1F4DD; Word Document (.docx)</div>
-            <div style="font-size:0.75rem;color:#666">Editable Word file — for further review and editing</div>
+            <div style="font-size:0.75rem;color:#666">Editable Word file — for review and further editing</div>
           </div>
         </label>
         <label style="display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer" id="cbfOptDrive">
           <input type="checkbox" id="cbfChkDrive" checked style="width:18px;height:18px;accent-color:#1a8a42;cursor:pointer">
           <div>
-            <div style="font-weight:700;color:#1a8a42;font-size:0.95rem">&#x2601; Upload to Google Drive</div>
-            <div style="font-size:0.75rem;color:#666">Auto-attach PDF to client's Drive folder</div>
+            <div style="font-weight:700;color:#1a8a42;font-size:0.95rem">&#x2601; Upload PDF to Google Drive</div>
+            <div style="font-size:0.75rem;color:#666">Auto-attach report to client folder in Drive</div>
           </div>
         </label>
       </div>
-      <div id="cbfRptProgress" style="display:none;text-align:center;font-size:0.82rem;color:#1a8a42;margin-bottom:14px;font-weight:600">
-        &#x23F3; Generating report...
+      <div id="cbfRptProgress" style="display:none;text-align:center;font-size:0.82rem;color:#1a8a42;margin-bottom:14px;font-weight:600;padding:8px;background:#f0fdf4;border-radius:6px">
+        Generating...
       </div>
       <div style="display:flex;gap:10px">
         <button onclick="hideCBFReportModal()" style="flex:1;padding:10px;border:2px solid #e2e8f0;background:#fff;border-radius:8px;cursor:pointer;font-size:0.9rem;color:#555;font-weight:600">Cancel</button>
@@ -2137,200 +2106,15 @@
       });
     });
     initAllSigPads();
-
-    // ═══════════════════════════════════════════════════════════
-    //  INTERVIEW FORM INTEGRATION
-    // ═══════════════════════════════════════════════════════════
-    var CBF_SHEET_URL = 'https://script.google.com/macros/s/AKfycbx5cfixkka7bcw7PyrY8iGDNE3ea6vym5ox2xnEMEol_Z4kkxwhzD2QHpIh5OUKgoMiwg/exec';
-    var cbfLoadedCode = '';
-    var cbfLoadedName = '';
-
-    function cbfSetStatus(msg, type) {
-      var el = document.getElementById('cbfStatus');
-      el.textContent = msg; el.style.display = msg ? 'inline-block' : 'none';
-      el.style.background = type==='ok'?'#1a8a42': type==='err'?'#b02a1f':'#1a6fa8';
-    }
-
-    function setCE(id, text) {
-      var el = document.getElementById(id);
-      if (el && text) el.textContent = text;
-    }
-
-    async function cbfFetch() {
-      var code = document.getElementById('cbfCodeInput').value.trim().toUpperCase();
-      var btn  = document.getElementById('cbfFetchBtn');
-      if (!code) { alert('Please enter an Application Code.'); return; }
-      if (!code.startsWith('RBCCI-')) { alert('Invalid format — should be RBCCI-YYYY-XXXXXX'); return; }
-
-      btn.disabled = true; btn.textContent = '⟳ Fetching…';
-      cbfSetStatus('Contacting server…', 'info');
-
-      try {
-        var resp = await fetch(CBF_SHEET_URL, {
-          method: 'POST',
-          body: JSON.stringify({ __action: 'fetchSnapshot', appCode: code })
-        });
-        var result = await resp.json();
-
-        if (result.result === 'success' && result.record) {
-          var snap = result.record.snapshot;
-          var rec  = result.record;
-          cbfLoadedCode = code;
-          cbfLoadedName = rec.fullName;
-
-          // ── Auto-populate header fields ──────────────────────
-          var fullName = [snap.fieldFirstName, snap.fieldMiddleName, snap.fieldLastName]
-            .filter(Boolean).join(' ') + (snap.fieldSuffix ? ', '+snap.fieldSuffix : '');
-          setCE('cbfBorrowerName', fullName || rec.fullName);
-          setCE('cbfRefNo', code);
-          setCE('cbfDateCheck', new Date().toLocaleDateString('en-PH',{month:'long',day:'numeric',year:'numeric'}));
-
-          var btype = snap['radio_btype'] || '';
-          setCE('cbfClientType', btype || 'Individual');
-
-          // Pre-fill existing loans from the interview into the first lender card
-          var hasLoans = snap['radio_hasloans'];
-          if (hasLoans === 'Yes' || hasLoans === 'yes') {
-            // Get lender cards already added, add one if none exist
-            var cards = document.querySelectorAll('#lenderContainer .lc');
-            if (!cards.length) addCard();
-            cards = document.querySelectorAll('#lenderContainer .lc');
-
-            // Map interview loan fields to lender card fields
-            var lenders = [
-              { name: snap.loan1Lender, bal: snap.loan1Balance, pay: snap.loan1Pay, type: snap['radio_st1'] },
-              { name: snap.loan2Lender, bal: snap.loan2Balance, pay: snap.loan2Pay, type: snap['radio_st2'] },
-              { name: snap.loan3Lender, bal: snap.loan3Balance, pay: snap.loan3Pay, type: snap['radio_st3'] }
-            ].filter(function(l){ return l.name; });
-
-            lenders.forEach(function(l, i) {
-              if (i >= cards.length) addCard();
-              cards = document.querySelectorAll('#lenderContainer .lc');
-              var card = cards[i];
-              if (!card) return;
-              var sels  = card.querySelectorAll('select');
-              var inps  = card.querySelectorAll('input');
-              var areas = card.querySelectorAll('textarea');
-              // Creditor name select — try to match, else leave as-is
-              if (sels[0]) {
-                var found = false;
-                for (var o=0; o<sels[0].options.length; o++) {
-                  if (sels[0].options[o].text.toLowerCase().includes((l.name||'').toLowerCase().slice(0,6))) {
-                    sels[0].selectedIndex = o; found = true; break;
-                  }
-                }
-                if (!found) {
-                  // Pick __other__ and fill specify field
-                  for (var o=0; o<sels[0].options.length; o++) {
-                    if (sels[0].options[o].value === '__other__') { sels[0].selectedIndex=o; break; }
-                  }
-                  handleCreditorChange(sels[0]);
-                  var spec = card.querySelector('.fb-specify');
-                  if (spec) spec.value = l.name;
-                }
-              }
-              if (inps[0]) inps[0].value = l.bal || '';  // outstanding balance
-              if (inps[1]) inps[1].value = l.pay || '';  // monthly amortization
-              // Loan status
-              if (sels[1] && l.type) {
-                for (var o=0; o<sels[1].options.length; o++) {
-                  if (sels[1].options[o].value === l.type || sels[1].options[o].text.toLowerCase().includes((l.type||'').toLowerCase())) {
-                    sels[1].selectedIndex = o; break;
-                  }
-                }
-              }
-            });
-          }
-
-          document.getElementById('cbfLoaded').style.display = 'inline-block';
-          cbfSetStatus('✓ Loaded: ' + rec.fullName, 'ok');
-          setTimeout(function(){ cbfSetStatus('',''); }, 8000);
-
-        } else if (result.result === 'not_found') {
-          cbfSetStatus('✗ Not found', 'err');
-          alert('No interview record found for code: ' + code);
-        } else {
-          throw new Error(result.message || 'Unknown error');
-        }
-      } catch(e) {
-        cbfSetStatus('✗ Failed', 'err');
-        alert('Could not reach server: ' + e.message);
-      } finally {
-        btn.disabled = false; btn.textContent = '⬇ Fetch & Load';
-      }
-    }
-
-    async function cbfSaveSheets() {
-      var btn = document.getElementById('cbfSaveBtn');
-      btn.disabled = true; btn.textContent = '⟳ Saving…';
-
-      function gce(id) { var e=document.getElementById(id); return e ? e.textContent.trim() : ''; }
-
-      // Collect lender card data
-      var lenderData = [];
-      document.querySelectorAll('#lenderContainer .lc').forEach(function(card, i) {
-        var sels  = card.querySelectorAll('select');
-        var inps  = card.querySelectorAll('input');
-        var areas = card.querySelectorAll('textarea');
-        var spec  = card.querySelector('.fb-specify');
-        var credName = sels[0] && sels[0].value === '__other__' && spec ? spec.value : (sels[0] ? sels[0].options[sels[0].selectedIndex].text : '');
-        lenderData.push({
-          no: i+1,
-          creditor:    credName,
-          balance:     inps[0] ? inps[0].value : '',
-          amortization:inps[1] ? inps[1].value : '',
-          status:      sels[1] ? sels[1].value : '',
-          remarks:     areas[0] ? areas[0].value : ''
-        });
-      });
-
-      var payload = {
-        __action:     'saveCreditFindings',
-        appCode:      cbfLoadedCode || ('CBF-'+new Date().getTime()),
-        fullName:     gce('cbfBorrowerName'),
-        refNo:        gce('cbfRefNo'),
-        dateCheck:    gce('cbfDateCheck'),
-        investigator: gce('cbfInvestigator'),
-        branch:       gce('cbfBranch'),
-        clientType:   gce('cbfClientType'),
-        summary:      gce('cbfSummary'),
-        remarks:      gce('cbfRemarks'),
-        lenders:      JSON.stringify(lenderData),
-        timestamp:    new Date().toLocaleString('en-PH', {timeZone:'Asia/Manila'})
-      };
-
-      try {
-        var resp = await fetch(CBF_SHEET_URL, { method:'POST', body:JSON.stringify(payload) });
-        var result = await resp.json();
-        if (result.result === 'success') {
-          cbfSetStatus('✓ Saved!', 'ok');
-          alert('✓ Credit Background Findings saved to Google Sheets!');
-        } else {
-          throw new Error(result.message || 'Save failed');
-        }
-      } catch(e) {
-        cbfSetStatus('✗ Failed', 'err');
-        alert('✗ Save failed: ' + e.message);
-      } finally {
-        btn.disabled = false; btn.textContent = '💾 Save to Sheets';
-        setTimeout(function(){ cbfSetStatus('',''); }, 6000);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      var inp = document.getElementById('cbfCodeInput');
-      if (inp) inp.addEventListener('keydown', function(e){ if(e.key==='Enter') cbfFetch(); });
-    });
-
   </script>
 
-  <!-- Word/docx library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.8.2/docx.umd.min.js"></script>
+  <!-- docx library for Word generation -->
+  <script src="https://unpkg.com/docx@7.8.2/build/index.umd.js"></script>
   <!-- FileSaver -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
   <script>
-  // ── Report Modal ─────────────────────────────────────────────────────────────
+  // -- Report Modal Controls --------------------------------------------------
   function showCBFReportModal() {
     var modal = document.getElementById('cbfReportModal');
     modal.style.display = 'flex';
@@ -2338,32 +2122,24 @@
     document.getElementById('cbfRptProgress').style.display = 'none';
     var btn = document.getElementById('cbfBtnGenerate');
     btn.disabled = false;
-    btn.textContent = '📋 Generate Now';
+    btn.textContent = 'Generate Now';
   }
-
   function hideCBFReportModal() {
     document.getElementById('cbfReportModal').style.display = 'none';
   }
-
   function cbfUpdateOptStyles() {
-    document.getElementById('cbfOptPDF').style.borderColor  = document.getElementById('cbfChkPDF').checked  ? '#dc2626' : '#e2e8f0';
-    document.getElementById('cbfOptWord').style.borderColor = document.getElementById('cbfChkWord').checked ? '#2563eb' : '#e2e8f0';
-    document.getElementById('cbfOptDrive').style.borderColor= document.getElementById('cbfChkDrive').checked? '#1a8a42' : '#e2e8f0';
+    document.getElementById('cbfOptPDF').style.borderColor   = document.getElementById('cbfChkPDF').checked   ? '#dc2626' : '#e2e8f0';
+    document.getElementById('cbfOptWord').style.borderColor  = document.getElementById('cbfChkWord').checked  ? '#2563eb' : '#e2e8f0';
+    document.getElementById('cbfOptDrive').style.borderColor = document.getElementById('cbfChkDrive').checked ? '#1a8a42' : '#e2e8f0';
   }
-  ['cbfChkPDF','cbfChkWord','cbfChkDrive'].forEach(function(id) {
-    document.getElementById(id).addEventListener('change', cbfUpdateOptStyles);
-  });
-  document.getElementById('cbfReportModal').addEventListener('click', function(e) {
-    if (e.target === this) hideCBFReportModal();
-  });
 
-  // ── Helper: get contenteditable text ─────────────────────────────────────────
+  // -- Helper: get contenteditable text --------------------------------------
   function cbfGet(id) {
     var el = document.getElementById(id);
-    return el ? el.innerText.trim() : '';
+    return el ? (el.innerText || el.textContent || '').trim() : '';
   }
 
-  // ── Collect lender data from cards ───────────────────────────────────────────
+  // -- Collect lender card data ----------------------------------------------
   function cbfGetLenders() {
     var lenders = [];
     document.querySelectorAll('#lenderContainer .lc').forEach(function(card, i) {
@@ -2376,194 +2152,313 @@
       var remarks = card.querySelector('.fb-tall');
       lenders.push({
         no:          i + 1,
-        creditor:    credName || '—',
-        type:        sels[1] ? sels[1].options[sels[1].selectedIndex].text : '—',
-        balance:     inps[0] ? inps[0].value || '—' : '—',
-        outstanding: inps[1] ? inps[1].value || '—' : '—',
-        monthly:     inps[2] ? inps[2].value || '—' : '—',
-        status:      sels[2] ? sels[2].options[sels[2].selectedIndex].text : '—',
-        maturity:    inps[3] ? inps[3].value || '—' : '—',
-        remarks:     remarks ? remarks.innerText.trim() || '—' : '—'
+        creditor:    credName || '',
+        type:        sels[1] ? sels[1].options[sels[1].selectedIndex].text : '',
+        balance:     inps[0] ? inps[0].value || '' : '',
+        outstanding: inps[1] ? inps[1].value || '' : '',
+        monthly:     inps[2] ? inps[2].value || '' : '',
+        status:      sels[2] ? sels[2].options[sels[2].selectedIndex].text : '',
+        maturity:    inps[3] ? inps[3].value || '' : '',
+        remarks:     remarks ? (remarks.innerText || remarks.textContent || '').trim() : ''
       });
     });
     return lenders;
   }
 
-  // ── Main Generate Function ────────────────────────────────────────────────────
+  // -- Main Generate Function ------------------------------------------------
   async function cbfGenerateReport() {
     var doPDF   = document.getElementById('cbfChkPDF').checked;
     var doWord  = document.getElementById('cbfChkWord').checked;
     var doDrive = document.getElementById('cbfChkDrive').checked;
 
-    if (!doPDF && !doWord && !doDrive) {
-      alert('Please select at least one option.');
-      return;
-    }
+    if (!doPDF && !doWord && !doDrive) { alert('Please select at least one option.'); return; }
 
     var btn  = document.getElementById('cbfBtnGenerate');
     var prog = document.getElementById('cbfRptProgress');
     btn.disabled = true;
-    btn.textContent = '⏳ Generating...';
+    btn.textContent = 'Generating...';
     prog.style.display = 'block';
     prog.style.color = '#1a8a42';
 
-    var borrower   = cbfGet('cbfBorrowerName');
-    var refNo      = cbfGet('cbfRefNo');
-    var dateCheck  = cbfGet('cbfDateCheck');
-    var investigator = cbfGet('cbfInvestigator');
-    var branch     = cbfGet('cbfBranch');
-    var clientType = cbfGet('cbfClientType');
-    var summary    = cbfGet('cbfSummary');
-    var remarks    = cbfGet('cbfRemarks');
-    var lenders    = cbfGetLenders();
-    var appCode    = cbfLoadedCode || refNo || 'UNKNOWN';
-    var clientName = cbfLoadedName || borrower || 'Client';
-    var fn         = 'CBF_' + clientName.replace(/[^a-zA-Z0-9]/g,'_') + '_' + new Date().toISOString().slice(0,10);
-    var date       = new Date().toLocaleDateString('en-PH', {year:'numeric',month:'long',day:'numeric'});
+    // Collect all data
+    var borrower     = cbfGet('cbfBorrowerName')   || '';
+    var refNo        = cbfGet('cbfRefNo')           || '';
+    var dateCheck    = cbfGet('cbfDateCheck')       || '';
+    var investigator = cbfGet('cbfInvestigator')    || '';
+    var branch       = cbfGet('cbfBranch')          || '';
+    var clientType   = cbfGet('cbfClientType')      || '';
+    var summary      = cbfGet('cbfSummary')         || 'No summary provided.';
+    var remarks      = cbfGet('cbfRemarks')         || 'No remarks provided.';
+    var lenders      = cbfGetLenders();
+    var appCode      = cbfLoadedCode || refNo || 'UNKNOWN';
+    var clientName   = cbfLoadedName || borrower || 'Client';
+    var fn           = 'CBF_' + clientName.replace(/[^a-zA-Z0-9]/g,'_') + '_' + new Date().toISOString().slice(0,10);
+    var datePrinted  = new Date().toLocaleDateString('en-PH', {year:'numeric',month:'long',day:'numeric'});
+
+    // Compute totals from lender data
+    var totalOriginal = 0, totalOutstanding = 0, totalMonthly = 0;
+    lenders.forEach(function(l) {
+      totalOriginal    += parseFloat((l.balance     || '0').replace(/[^0-9.]/g,'')) || 0;
+      totalOutstanding += parseFloat((l.outstanding || '0').replace(/[^0-9.]/g,'')) || 0;
+      totalMonthly     += parseFloat((l.monthly     || '0').replace(/[^0-9.]/g,'')) || 0;
+    });
+    function php(n) { return 'PHP ' + n.toLocaleString('en-PH', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+    function dash(v) { return (v && v.trim() && v !== '--') ? v : '—'; }
 
     try {
-      // ── PDF ──────────────────────────────────────────────────────────────────
-      if (doPDF) {
-        prog.textContent = '⏳ Generating PDF...';
-        await new Promise(function(r){ setTimeout(r, 100); });
+      var pdfBlob = null;
 
-        // Use html2pdf on the printArea
-        var delBtns = document.querySelectorAll('.btn-del, .fab-wrap, #cbfReportModal');
-        delBtns.forEach(function(el){ el.style.display='none'; });
+      // ===== PDF =====
+      if (doPDF || doDrive) {
+        prog.textContent = 'Generating PDF...';
+        await new Promise(function(r){ setTimeout(r,100); });
+
+        var hideEls = document.querySelectorAll('.btn-del, .fab-wrap, #cbfReportModal, #cbfTopBar');
+        hideEls.forEach(function(el){ el.dataset.oldDisplay = el.style.display; el.style.display='none'; });
 
         var opt = {
-          margin:      [10,10,10,10],
+          margin:      [12,12,12,12],
           filename:    fn + '.pdf',
           image:       { type:'jpeg', quality:0.98 },
           html2canvas: { scale:2, useCORS:true, logging:false },
           jsPDF:       { unit:'mm', format:'a4', orientation:'portrait' }
         };
 
-        var pdfBlob = await html2pdf().set(opt).from(document.getElementById('printArea')).outputPdf('blob');
-        saveAs(pdfBlob, fn + '.pdf');
-
-        delBtns.forEach(function(el){ el.style.display=''; });
+        pdfBlob = await html2pdf().set(opt).from(document.getElementById('printArea')).outputPdf('blob');
+        hideEls.forEach(function(el){ el.style.display = el.dataset.oldDisplay || ''; });
         document.getElementById('cbfReportModal').style.display = 'flex';
 
-        // ── Upload PDF to Drive ───────────────────────────────────────────────
-        if (doDrive && appCode && appCode !== 'UNKNOWN') {
-          prog.textContent = '⏳ Uploading PDF to Drive...';
-          await cbfUploadToDrive(pdfBlob, fn + '.pdf', 'application/pdf', appCode, clientName);
-        }
+        if (doPDF) saveAs(pdfBlob, fn + '.pdf');
       }
 
-      // ── Word ─────────────────────────────────────────────────────────────────
+      // ===== WORD =====
       if (doWord) {
-        prog.textContent = '⏳ Generating Word document...';
-        await new Promise(function(r){ setTimeout(r, 200); });
+        prog.textContent = 'Generating Word document...';
+        await new Promise(function(r){ setTimeout(r,300); });
 
         var D = window.docx;
-        if (!D) throw new Error('Word library not loaded');
+        if (!D) throw new Error('Word (docx) library not loaded. Please check your internet connection and try again.');
 
-        var brd  = { style:D.BorderStyle.SINGLE, size:4, color:'2d6a4f' };
-        var brdL = { style:D.BorderStyle.SINGLE, size:1, color:'CCCCCC' };
-        var borders = { top:brdL, bottom:brdL, left:brdL, right:brdL };
-        var mg = { top:80, bottom:80, left:120, right:120 };
+        var DARK    = '071a0e';
+        var GREEN   = '1a5c35';
+        var LGREEN  = 'F0FDF4';
+        var GRAY    = '555555';
+        var LGRAY   = 'F5F5F5';
+        var none    = { style: D.BorderStyle.NONE };
+        var thin    = function(c){ return { style: D.BorderStyle.SINGLE, size:4, color: c||'CCCCCC' }; };
+        var thick   = function(c){ return { style: D.BorderStyle.SINGLE, size:8, color: c||'2d6a4f' }; };
 
-        function cell(text, bold, shade) {
-          var opts = { width:{size:4680,type:D.WidthType.DXA}, borders:borders, margins:mg };
-          if (shade) opts.shading = { fill: shade };
-          return new D.TableCell({ ...opts, children:[new D.Paragraph({ children:[new D.TextRun({ text:text||'', bold:!!bold, size:20, font:'Calibri' })] })] });
+        function allBorders(b) { return { top:b, bottom:b, left:b, right:b }; }
+        function noBorders()   { return { top:none, bottom:none, left:none, right:none, insideH:none, insideV:none }; }
+
+        function mkCell(text, opts) {
+          opts = opts || {};
+          var children = [];
+          var runs = Array.isArray(text) ? text : [new D.TextRun({ text: String(text||'—'), bold:!!opts.bold, size:opts.size||20, color:opts.color||'000000', italics:!!opts.italic })];
+          children.push(new D.Paragraph({ alignment: opts.align || D.AlignmentType.LEFT, spacing:{before:60,after:60}, children: runs }));
+          return new D.TableCell({
+            width:   { size: opts.w || 4680, type: D.WidthType.DXA },
+            borders: opts.borders || allBorders(thin()),
+            shading: opts.shade ? { fill: opts.shade } : undefined,
+            columnSpan: opts.span || 1,
+            margins: { top:80, bottom:80, left:140, right:140 },
+            children: children
+          });
         }
-        function row2(l, v) { return new D.TableRow({ children:[cell(l,true,'F0F5F0'), cell(v||'—')] }); }
-        function hdr(n, t) { return new D.Paragraph({ spacing:{before:280,after:100}, children:[new D.TextRun({ text:n+'. '+t, bold:true, size:24, font:'Calibri', color:'071a0e' })] }); }
-        function para(t) { return new D.Paragraph({ spacing:{after:80}, children:[new D.TextRun({ text:t||'', size:20, font:'Calibri' })] }); }
-        function divider() { return new D.Paragraph({ border:{ bottom:{ style:D.BorderStyle.SINGLE, size:4, color:'2d6a4f' } }, spacing:{after:80} }); }
 
-        // Build lender table rows
-        var lenderHdrRow = new D.TableRow({ children:[
-          ['#','Creditor','Type','Original','Outstanding','Monthly','Status','Maturity','Remarks']
-            .map(function(h){ return new D.TableCell({ borders:borders, shading:{fill:'F0F5F0'}, margins:mg, children:[new D.Paragraph({ children:[new D.TextRun({ text:h, bold:true, size:18, font:'Calibri' })] })] }); })
-        ].flat() });
-
-        var lenderRows = lenders.map(function(l) {
+        function infoRow(label, value) {
           return new D.TableRow({ children:[
-            [l.no,l.creditor,l.type,l.balance,l.outstanding,l.monthly,l.status,l.maturity,l.remarks]
-              .map(function(v){ return new D.TableCell({ borders:borders, margins:mg, children:[new D.Paragraph({ children:[new D.TextRun({ text:String(v), size:18, font:'Calibri' })] })] }); })
-          ].flat() });
+            mkCell(label, { shade:LGREEN, bold:true, size:20, color:DARK, w:2700, borders:allBorders(thin('AACCAA')) }),
+            mkCell(dash(value), { size:20, w:6660, borders:allBorders(thin('AACCAA')) })
+          ]});
+        }
+
+        function secHdr(text) {
+          return new D.Paragraph({
+            spacing: { before:320, after:120 },
+            border:  { bottom: thick(GREEN) },
+            children:[
+              new D.TextRun({ text: text, bold:true, size:26, color:DARK }),
+            ]
+          });
+        }
+
+        function bodyText(text) {
+          return new D.Paragraph({
+            spacing: { after:120, line:300, lineRule:D.LineRuleType.AUTO },
+            children:[ new D.TextRun({ text: text||'—', size:21 }) ]
+          });
+        }
+
+        function gap() { return new D.Paragraph({ spacing:{ after:200 } }); }
+
+        // Lender table column widths
+        var cw = [380,1600,900,1000,1050,900,900,980,1650];
+        var lHdrs = ['#','Creditor / Lender','Type','Original','Outstanding','Monthly','Status','Maturity','Remarks'];
+
+        var lHdrRow = new D.TableRow({
+          tableHeader:true,
+          children: lHdrs.map(function(h,i){
+            return mkCell(h, { shade:GREEN, bold:true, size:17, color:'FFFFFF', w:cw[i], borders:allBorders(thin(GREEN)) });
+          })
         });
 
+        var lDataRows = lenders.map(function(l, idx){
+          var shade = idx%2===0 ? 'FFFFFF' : 'F8FBF8';
+          var vals = [String(l.no), dash(l.creditor), dash(l.type), dash(l.balance), dash(l.outstanding), dash(l.monthly), dash(l.status), dash(l.maturity), dash(l.remarks)];
+          return new D.TableRow({
+            children: vals.map(function(v,i){
+              return mkCell(v, { shade:shade, size:18, w:cw[i], borders:allBorders(thin()) });
+            })
+          });
+        });
+
+        var lTotRow = new D.TableRow({
+          children:[
+            mkCell('TOTALS', { shade:LGREEN, bold:true, size:18, color:DARK, w:cw[0]+cw[1]+cw[2], span:3, borders:allBorders(thin('AACCAA')) }),
+            mkCell(php(totalOriginal),    { shade:LGREEN, bold:true, size:18, color:DARK, w:cw[3], borders:allBorders(thin('AACCAA')) }),
+            mkCell(php(totalOutstanding), { shade:LGREEN, bold:true, size:18, color:DARK, w:cw[4], borders:allBorders(thin('AACCAA')) }),
+            mkCell(php(totalMonthly),     { shade:LGREEN, bold:true, size:18, color:DARK, w:cw[5], borders:allBorders(thin('AACCAA')) }),
+            mkCell('', { shade:LGREEN, w:cw[6]+cw[7]+cw[8], span:3, borders:allBorders(thin('AACCAA')) }),
+          ]
+        });
+
+        // Signature table (no outer borders)
+        var sigTable = new D.Table({
+          width: { size:9360, type:D.WidthType.DXA },
+          borders: noBorders(),
+          rows:[
+            new D.TableRow({ children:[
+              new D.TableCell({ width:{size:3000,type:D.WidthType.DXA}, borders:noBorders(), margins:{top:80,bottom:80,left:0,right:0},
+                children:[new D.Paragraph({ spacing:{before:700}, border:{top: thick(DARK)},
+                  children:[new D.TextRun({ text: investigator && investigator !== '—' ? investigator : '_________________________', bold:true, size:20, color:DARK })] })] }),
+              new D.TableCell({ width:{size:360,type:D.WidthType.DXA}, borders:noBorders(), children:[new D.Paragraph({children:[new D.TextRun({text:''})]})]}),
+              new D.TableCell({ width:{size:3000,type:D.WidthType.DXA}, borders:noBorders(), margins:{top:80,bottom:80,left:0,right:0},
+                children:[new D.Paragraph({ spacing:{before:700}, border:{top: thick(DARK)},
+                  children:[new D.TextRun({ text:'_________________________', bold:true, size:20, color:DARK })] })] }),
+              new D.TableCell({ width:{size:360,type:D.WidthType.DXA}, borders:noBorders(), children:[new D.Paragraph({children:[new D.TextRun({text:''})]})]}),
+              new D.TableCell({ width:{size:2640,type:D.WidthType.DXA}, borders:noBorders(), margins:{top:80,bottom:80,left:0,right:0},
+                children:[new D.Paragraph({ spacing:{before:700}, border:{top: thick(DARK)},
+                  children:[new D.TextRun({ text:'_________________________', bold:true, size:20, color:DARK })] })] }),
+            ]}),
+            new D.TableRow({ children:[
+              new D.TableCell({ width:{size:3000,type:D.WidthType.DXA}, borders:noBorders(), children:[new D.Paragraph({children:[new D.TextRun({text:'Investigator / Encoder', size:18, color:GRAY})]})] }),
+              new D.TableCell({ width:{size:360,type:D.WidthType.DXA}, borders:noBorders(), children:[new D.Paragraph({children:[new D.TextRun({text:''})]})]}),
+              new D.TableCell({ width:{size:3000,type:D.WidthType.DXA}, borders:noBorders(), children:[new D.Paragraph({children:[new D.TextRun({text:'Credit Evaluation Head', size:18, color:GRAY})]})] }),
+              new D.TableCell({ width:{size:360,type:D.WidthType.DXA}, borders:noBorders(), children:[new D.Paragraph({children:[new D.TextRun({text:''})]})]}),
+              new D.TableCell({ width:{size:2640,type:D.WidthType.DXA}, borders:noBorders(), children:[new D.Paragraph({children:[new D.TextRun({text:'President & CEO', size:18, color:GRAY})]})] }),
+            ]}),
+          ]
+        });
+
+        var docChildren = [
+          // Header
+          new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{after:0}, children:[new D.TextRun({text:'RURAL BANK OF CALBAYOG CITY, INC.', bold:true, size:36, color:DARK})] }),
+          new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{after:0}, children:[new D.TextRun({text:'82 T. Bugallon St., Brgy. Central, Calbayog City, Western Samar 6710', size:18, color:GRAY})] }),
+          new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{after:0}, children:[new D.TextRun({text:'BSP License No. RB-0567', size:18, color:GRAY})] }),
+          new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{before:120,after:0}, border:{bottom: thick(GREEN)}, children:[new D.TextRun({text:'', size:18})] }),
+          new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{before:160,after:0}, children:[new D.TextRun({text:'CREDIT BACKGROUND FINDINGS REPORT', bold:true, size:32, color:GREEN})] }),
+          new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{after:0}, children:[new D.TextRun({text:'RBCC 4.02 Rev.16  —  STRICTLY CONFIDENTIAL', size:18, color:GRAY, italics:true})] }),
+          new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{after:280}, children:[new D.TextRun({text:'Date Printed: ' + datePrinted, size:18, color:GRAY})] }),
+
+          // Section I
+          secHdr('I.  CLIENT INFORMATION'),
+          new D.Table({ width:{size:9360,type:D.WidthType.DXA}, rows:[
+            infoRow('Borrower / Client Name', borrower),
+            infoRow('Reference No.', refNo),
+            infoRow('Date of Background Checking', dateCheck),
+            infoRow('Investigator / Encoder', investigator),
+            infoRow('Branch / Unit', branch),
+            infoRow('Client Classification', clientType),
+          ]}),
+          gap(),
+
+          // Section II
+          secHdr('II.  SUMMARY OF CREDIT OBLIGATIONS'),
+          new D.Table({ width:{size:9360,type:D.WidthType.DXA}, rows:[
+            infoRow('Total Number of Creditors / Lenders', lenders.length + (lenders.length === 1 ? ' creditor' : ' creditors')),
+            infoRow('Total Original Loan Amount', php(totalOriginal)),
+            infoRow('Total Outstanding Balance', php(totalOutstanding)),
+            infoRow('Total Monthly Obligation', php(totalMonthly)),
+          ]}),
+          gap(),
+
+          // Section III
+          secHdr('III.  DETAILED CREDITOR / LENDER OBLIGATIONS'),
+        ];
+
+        if (lenders.length > 0) {
+          docChildren.push(new D.Table({ width:{size:9360,type:D.WidthType.DXA}, rows: [lHdrRow].concat(lDataRows).concat([lTotRow]) }));
+        } else {
+          docChildren.push(bodyText('No creditors or lenders recorded for this client.'));
+        }
+
+        docChildren = docChildren.concat([
+          gap(),
+          secHdr('IV.  OVERALL CREDIT BACKGROUND SUMMARY'),
+          bodyText(summary),
+          gap(),
+          secHdr('V.  GENERAL REMARKS AND FINDINGS'),
+          bodyText(remarks),
+          gap(),
+          secHdr('VI.  CERTIFICATION'),
+          bodyText('I hereby certify that the information contained in this Credit Background Findings Report is true and accurate to the best of my knowledge, based on documents presented, records verified, and the background investigation conducted in accordance with the credit policies and procedures of the Rural Bank of Calbayog City, Inc.'),
+          gap(),
+          gap(),
+          sigTable,
+          gap(),
+          new D.Paragraph({
+            alignment: D.AlignmentType.CENTER,
+            border:    { top: thin() },
+            spacing:   { before:200 },
+            children:  [new D.TextRun({ text:'STRICTLY CONFIDENTIAL — For Internal Use Only — Rural Bank of Calbayog City, Inc. — BSP Lic. RB-0567', size:16, color:'999999', italics:true })]
+          }),
+        ]);
+
         var doc = new D.Document({
+          creator:     'RBCCI Credit Background Findings System',
+          title:       'Credit Background Findings — ' + borrower,
+          description: 'Credit Background Findings Report for ' + borrower + ' (Ref: ' + refNo + ')',
           sections:[{
             properties:{ page:{ size:{width:12240,height:15840}, margin:{top:900,right:900,bottom:900,left:900} } },
-            children:[
-              new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{after:40}, children:[new D.TextRun({ text:'RURAL BANK OF CALBAYOG CITY, INC.', bold:true, size:32, font:'Calibri', color:'071a0e' })] }),
-              new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{after:40}, children:[new D.TextRun({ text:'Credit Background Findings Report', size:26, font:'Calibri', color:'1a5c35' })] }),
-              new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{after:60}, children:[new D.TextRun({ text:'82 T. Bugallon St., Brgy. Central, Calbayog City, W. Samar 6710  |  BSP Lic: RB-0567', size:18, font:'Calibri', color:'666666' })] }),
-              new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{after:80}, children:[new D.TextRun({ text:'CONFIDENTIAL  |  Printed: '+date, size:18, font:'Calibri', color:'999999', italics:true })] }),
-              divider(),
-              hdr('1','Client Information'),
-              new D.Table({ width:{size:9360,type:D.WidthType.DXA}, rows:[
-                row2('Borrower Name', borrower),
-                row2('Reference No.', refNo),
-                row2('Date of Investigation', dateCheck),
-                row2('Investigator / Encoder', investigator),
-                row2('Branch / Unit', branch),
-                row2('Client Type', clientType),
-              ]}),
-              new D.Paragraph({ spacing:{after:120} }),
-              hdr('2','Creditor / Lender Obligations'),
-              new D.Table({ width:{size:9360,type:D.WidthType.DXA}, rows:[lenderHdrRow].concat(lenderRows) }),
-              new D.Paragraph({ spacing:{after:120} }),
-              hdr('3','Overall Credit Background Summary'),
-              para(summary || '—'),
-              new D.Paragraph({ spacing:{after:120} }),
-              hdr('4','General Remarks / Findings'),
-              para(remarks || '—'),
-              new D.Paragraph({ spacing:{before:400} }),
-              divider(),
-              new D.Paragraph({ spacing:{after:600}, children:[new D.TextRun({ text:'Prepared by: '+investigator+'   |   Date: '+dateCheck, size:20, font:'Calibri' })] }),
-              new D.Table({ width:{size:9360,type:D.WidthType.DXA}, rows:[
-                new D.TableRow({ children:[
-                  new D.TableCell({ borders:{top:brd,bottom:{style:D.BorderStyle.NONE},left:{style:D.BorderStyle.NONE},right:{style:D.BorderStyle.NONE}}, width:{size:3120,type:D.WidthType.DXA}, children:[new D.Paragraph({ children:[new D.TextRun({ text:'Investigator / Encoder', bold:true, size:18, font:'Calibri', color:'444444' })] })] }),
-                  new D.TableCell({ borders:{top:brd,bottom:{style:D.BorderStyle.NONE},left:{style:D.BorderStyle.NONE},right:{style:D.BorderStyle.NONE}}, width:{size:3120,type:D.WidthType.DXA}, children:[new D.Paragraph({ children:[new D.TextRun({ text:'Credit Evaluation Head', bold:true, size:18, font:'Calibri', color:'444444' })] })] }),
-                  new D.TableCell({ borders:{top:brd,bottom:{style:D.BorderStyle.NONE},left:{style:D.BorderStyle.NONE},right:{style:D.BorderStyle.NONE}}, width:{size:3120,type:D.WidthType.DXA}, children:[new D.Paragraph({ children:[new D.TextRun({ text:'President & CEO', bold:true, size:18, font:'Calibri', color:'444444' })] })] }),
-                ]})
-              ]}),
-              new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{before:200}, children:[new D.TextRun({ text:'CONFIDENTIAL — For internal use only — Rural Bank of Calbayog City, Inc.', size:16, font:'Calibri', color:'999999', italics:true })] }),
-            ]
+            children: docChildren
           }]
         });
 
         var wordBlob = await D.Packer.toBlob(doc);
         saveAs(wordBlob, fn + '.docx');
-
-        // ── Upload Word to Drive ──────────────────────────────────────────────
-        if (doDrive && appCode && appCode !== 'UNKNOWN') {
-          prog.textContent = '⏳ Uploading Word doc to Drive...';
-          await cbfUploadToDrive(wordBlob, fn + '.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', appCode, clientName);
-        }
       }
 
-      prog.textContent = '✅ Report generated successfully!';
+      // ===== DRIVE UPLOAD =====
+      if (doDrive && pdfBlob && appCode && appCode !== 'UNKNOWN') {
+        prog.textContent = 'Uploading PDF to Google Drive...';
+        await cbfUploadToDrive(pdfBlob, fn + '.pdf', 'application/pdf', appCode, clientName);
+      }
+
+      prog.textContent = 'Report generated successfully!';
       prog.style.color = '#1a8a42';
-      btn.textContent  = '✅ Done';
-      setTimeout(function(){ hideCBFReportModal(); }, 2000);
+      btn.textContent  = 'Done';
+      setTimeout(function(){ hideCBFReportModal(); }, 2200);
 
     } catch(e) {
-      console.error(e);
-      prog.textContent = '✗ Error: ' + e.message;
+      console.error('Report generation error:', e);
+      prog.textContent = 'Error: ' + e.message;
       prog.style.color = '#dc2626';
       btn.disabled = false;
-      btn.textContent = '📋 Try Again';
+      btn.textContent = 'Try Again';
     }
   }
 
-  // ── Upload file blob to Google Drive via Apps Script ─────────────────────────
+  
+  // -- Upload to Drive -------------------------------------------------------
   async function cbfUploadToDrive(blob, fileName, mimeType, appCode, clientName) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve) {
       var reader = new FileReader();
       reader.onload = async function(e) {
         var base64 = e.target.result.split(',')[1];
         try {
           var resp = await fetch(CBF_SHEET_URL, {
-            method: 'POST',
-            redirect: 'follow',
+            method: 'POST', redirect: 'follow',
             body: JSON.stringify({
               __action:   'uploadFileToDrive',
               appCode:    appCode,
@@ -2575,22 +2470,27 @@
           });
           var raw = await resp.text();
           var result;
-          try { result = JSON.parse(raw); } catch(e) { result = { result:'error', message:'Non-JSON response' }; }
-          if (result.result === 'success') {
-            console.log('Uploaded to Drive:', result.fileUrl);
-            resolve(result);
-          } else {
-            console.warn('Drive upload warning:', result.message);
-            resolve(result);
-          }
+          try { result = JSON.parse(raw); } catch(ex) { result = { result:'error' }; }
+          console.log('Drive upload result:', result.result, result.fileUrl || result.message);
+          resolve(result);
         } catch(err) {
           console.error('Drive upload error:', err);
-          resolve({ result:'error', message:err.message });
+          resolve({ result:'error' });
         }
       };
       reader.readAsDataURL(blob);
     });
   }
+
+  // -- Init modal listeners --------------------------------------------------
+  window.addEventListener('load', function() {
+    ['cbfChkPDF','cbfChkWord','cbfChkDrive'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('change', cbfUpdateOptStyles);
+    });
+    var modal = document.getElementById('cbfReportModal');
+    if (modal) modal.addEventListener('click', function(e){ if(e.target===this) hideCBFReportModal(); });
+  });
   </script>
 </body>
 
