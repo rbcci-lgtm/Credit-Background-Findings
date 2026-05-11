@@ -1744,6 +1744,54 @@
       </svg>
       Print
     </button>
+    <button class="fab" onclick="showCBFReportModal()" style="background:#d97706;color:#fff">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M11 12h2"/>
+      </svg>
+      Generate Report
+    </button>
+  </div>
+
+  <!-- GENERATE REPORT MODAL -->
+  <div id="cbfReportModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.55);align-items:center;justify-content:center">
+    <div style="background:#fff;border-radius:12px;padding:32px;max-width:440px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative">
+      <button onclick="hideCBFReportModal()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:1.3rem;cursor:pointer;color:#888">&#x2715;</button>
+      <div style="text-align:center;margin-bottom:20px">
+        <div style="font-size:2rem;margin-bottom:6px">&#x1F4CB;</div>
+        <div style="font-size:1.1rem;font-weight:700;color:#071a0e">Generate Credit Background Report</div>
+        <div style="font-size:0.78rem;color:#888;margin-top:4px">Export the complete Credit Background Findings report and upload to Google Drive</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">
+        <label style="display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer" id="cbfOptPDF">
+          <input type="checkbox" id="cbfChkPDF" checked style="width:18px;height:18px;accent-color:#dc2626;cursor:pointer">
+          <div>
+            <div style="font-weight:700;color:#dc2626;font-size:0.95rem">&#x1F4C4; PDF Report</div>
+            <div style="font-size:0.75rem;color:#666">Formatted A4 document — ideal for printing and archiving</div>
+          </div>
+        </label>
+        <label style="display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer" id="cbfOptWord">
+          <input type="checkbox" id="cbfChkWord" checked style="width:18px;height:18px;accent-color:#2563eb;cursor:pointer">
+          <div>
+            <div style="font-weight:700;color:#2563eb;font-size:0.95rem">&#x1F4DD; Word Document (.docx)</div>
+            <div style="font-size:0.75rem;color:#666">Editable Word file — for further review and editing</div>
+          </div>
+        </label>
+        <label style="display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer" id="cbfOptDrive">
+          <input type="checkbox" id="cbfChkDrive" checked style="width:18px;height:18px;accent-color:#1a8a42;cursor:pointer">
+          <div>
+            <div style="font-weight:700;color:#1a8a42;font-size:0.95rem">&#x2601; Upload to Google Drive</div>
+            <div style="font-size:0.75rem;color:#666">Auto-attach PDF to client's Drive folder</div>
+          </div>
+        </label>
+      </div>
+      <div id="cbfRptProgress" style="display:none;text-align:center;font-size:0.82rem;color:#1a8a42;margin-bottom:14px;font-weight:600">
+        &#x23F3; Generating report...
+      </div>
+      <div style="display:flex;gap:10px">
+        <button onclick="hideCBFReportModal()" style="flex:1;padding:10px;border:2px solid #e2e8f0;background:#fff;border-radius:8px;cursor:pointer;font-size:0.9rem;color:#555;font-weight:600">Cancel</button>
+        <button onclick="cbfGenerateReport()" id="cbfBtnGenerate" style="flex:2;padding:10px;background:#d97706;border:none;border-radius:8px;cursor:pointer;font-size:0.95rem;color:#fff;font-weight:700">&#x1F4CB; Generate Now</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -2093,7 +2141,7 @@
     // ═══════════════════════════════════════════════════════════
     //  INTERVIEW FORM INTEGRATION
     // ═══════════════════════════════════════════════════════════
-    var CBF_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxiXivG7xjReARJ2nZs_TY2DaNq36wx7bc-rz9yJ9RzyMxBcgZwQ7k2gLlmsbFh6-liVw/exec';
+    var CBF_SHEET_URL = 'https://script.google.com/macros/s/AKfycbx5cfixkka7bcw7PyrY8iGDNE3ea6vym5ox2xnEMEol_Z4kkxwhzD2QHpIh5OUKgoMiwg/exec';
     var cbfLoadedCode = '';
     var cbfLoadedName = '';
 
@@ -2274,6 +2322,275 @@
       if (inp) inp.addEventListener('keydown', function(e){ if(e.key==='Enter') cbfFetch(); });
     });
 
+  </script>
+
+  <!-- Word/docx library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.8.2/docx.umd.min.js"></script>
+  <!-- FileSaver -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+  <script>
+  // ── Report Modal ─────────────────────────────────────────────────────────────
+  function showCBFReportModal() {
+    var modal = document.getElementById('cbfReportModal');
+    modal.style.display = 'flex';
+    cbfUpdateOptStyles();
+    document.getElementById('cbfRptProgress').style.display = 'none';
+    var btn = document.getElementById('cbfBtnGenerate');
+    btn.disabled = false;
+    btn.textContent = '📋 Generate Now';
+  }
+
+  function hideCBFReportModal() {
+    document.getElementById('cbfReportModal').style.display = 'none';
+  }
+
+  function cbfUpdateOptStyles() {
+    document.getElementById('cbfOptPDF').style.borderColor  = document.getElementById('cbfChkPDF').checked  ? '#dc2626' : '#e2e8f0';
+    document.getElementById('cbfOptWord').style.borderColor = document.getElementById('cbfChkWord').checked ? '#2563eb' : '#e2e8f0';
+    document.getElementById('cbfOptDrive').style.borderColor= document.getElementById('cbfChkDrive').checked? '#1a8a42' : '#e2e8f0';
+  }
+  ['cbfChkPDF','cbfChkWord','cbfChkDrive'].forEach(function(id) {
+    document.getElementById(id).addEventListener('change', cbfUpdateOptStyles);
+  });
+  document.getElementById('cbfReportModal').addEventListener('click', function(e) {
+    if (e.target === this) hideCBFReportModal();
+  });
+
+  // ── Helper: get contenteditable text ─────────────────────────────────────────
+  function cbfGet(id) {
+    var el = document.getElementById(id);
+    return el ? el.innerText.trim() : '';
+  }
+
+  // ── Collect lender data from cards ───────────────────────────────────────────
+  function cbfGetLenders() {
+    var lenders = [];
+    document.querySelectorAll('#lenderContainer .lc').forEach(function(card, i) {
+      var sels  = card.querySelectorAll('select');
+      var inps  = card.querySelectorAll('input');
+      var spec  = card.querySelector('.fb-specify');
+      var credName = sels[0] && sels[0].value === '__other__' && spec
+        ? spec.value
+        : (sels[0] ? sels[0].options[sels[0].selectedIndex].text : '');
+      var remarks = card.querySelector('.fb-tall');
+      lenders.push({
+        no:          i + 1,
+        creditor:    credName || '—',
+        type:        sels[1] ? sels[1].options[sels[1].selectedIndex].text : '—',
+        balance:     inps[0] ? inps[0].value || '—' : '—',
+        outstanding: inps[1] ? inps[1].value || '—' : '—',
+        monthly:     inps[2] ? inps[2].value || '—' : '—',
+        status:      sels[2] ? sels[2].options[sels[2].selectedIndex].text : '—',
+        maturity:    inps[3] ? inps[3].value || '—' : '—',
+        remarks:     remarks ? remarks.innerText.trim() || '—' : '—'
+      });
+    });
+    return lenders;
+  }
+
+  // ── Main Generate Function ────────────────────────────────────────────────────
+  async function cbfGenerateReport() {
+    var doPDF   = document.getElementById('cbfChkPDF').checked;
+    var doWord  = document.getElementById('cbfChkWord').checked;
+    var doDrive = document.getElementById('cbfChkDrive').checked;
+
+    if (!doPDF && !doWord && !doDrive) {
+      alert('Please select at least one option.');
+      return;
+    }
+
+    var btn  = document.getElementById('cbfBtnGenerate');
+    var prog = document.getElementById('cbfRptProgress');
+    btn.disabled = true;
+    btn.textContent = '⏳ Generating...';
+    prog.style.display = 'block';
+    prog.style.color = '#1a8a42';
+
+    var borrower   = cbfGet('cbfBorrowerName');
+    var refNo      = cbfGet('cbfRefNo');
+    var dateCheck  = cbfGet('cbfDateCheck');
+    var investigator = cbfGet('cbfInvestigator');
+    var branch     = cbfGet('cbfBranch');
+    var clientType = cbfGet('cbfClientType');
+    var summary    = cbfGet('cbfSummary');
+    var remarks    = cbfGet('cbfRemarks');
+    var lenders    = cbfGetLenders();
+    var appCode    = cbfLoadedCode || refNo || 'UNKNOWN';
+    var clientName = cbfLoadedName || borrower || 'Client';
+    var fn         = 'CBF_' + clientName.replace(/[^a-zA-Z0-9]/g,'_') + '_' + new Date().toISOString().slice(0,10);
+    var date       = new Date().toLocaleDateString('en-PH', {year:'numeric',month:'long',day:'numeric'});
+
+    try {
+      // ── PDF ──────────────────────────────────────────────────────────────────
+      if (doPDF) {
+        prog.textContent = '⏳ Generating PDF...';
+        await new Promise(function(r){ setTimeout(r, 100); });
+
+        // Use html2pdf on the printArea
+        var delBtns = document.querySelectorAll('.btn-del, .fab-wrap, #cbfReportModal');
+        delBtns.forEach(function(el){ el.style.display='none'; });
+
+        var opt = {
+          margin:      [10,10,10,10],
+          filename:    fn + '.pdf',
+          image:       { type:'jpeg', quality:0.98 },
+          html2canvas: { scale:2, useCORS:true, logging:false },
+          jsPDF:       { unit:'mm', format:'a4', orientation:'portrait' }
+        };
+
+        var pdfBlob = await html2pdf().set(opt).from(document.getElementById('printArea')).outputPdf('blob');
+        saveAs(pdfBlob, fn + '.pdf');
+
+        delBtns.forEach(function(el){ el.style.display=''; });
+        document.getElementById('cbfReportModal').style.display = 'flex';
+
+        // ── Upload PDF to Drive ───────────────────────────────────────────────
+        if (doDrive && appCode && appCode !== 'UNKNOWN') {
+          prog.textContent = '⏳ Uploading PDF to Drive...';
+          await cbfUploadToDrive(pdfBlob, fn + '.pdf', 'application/pdf', appCode, clientName);
+        }
+      }
+
+      // ── Word ─────────────────────────────────────────────────────────────────
+      if (doWord) {
+        prog.textContent = '⏳ Generating Word document...';
+        await new Promise(function(r){ setTimeout(r, 200); });
+
+        var D = window.docx;
+        if (!D) throw new Error('Word library not loaded');
+
+        var brd  = { style:D.BorderStyle.SINGLE, size:4, color:'2d6a4f' };
+        var brdL = { style:D.BorderStyle.SINGLE, size:1, color:'CCCCCC' };
+        var borders = { top:brdL, bottom:brdL, left:brdL, right:brdL };
+        var mg = { top:80, bottom:80, left:120, right:120 };
+
+        function cell(text, bold, shade) {
+          var opts = { width:{size:4680,type:D.WidthType.DXA}, borders:borders, margins:mg };
+          if (shade) opts.shading = { fill: shade };
+          return new D.TableCell({ ...opts, children:[new D.Paragraph({ children:[new D.TextRun({ text:text||'', bold:!!bold, size:20, font:'Calibri' })] })] });
+        }
+        function row2(l, v) { return new D.TableRow({ children:[cell(l,true,'F0F5F0'), cell(v||'—')] }); }
+        function hdr(n, t) { return new D.Paragraph({ spacing:{before:280,after:100}, children:[new D.TextRun({ text:n+'. '+t, bold:true, size:24, font:'Calibri', color:'071a0e' })] }); }
+        function para(t) { return new D.Paragraph({ spacing:{after:80}, children:[new D.TextRun({ text:t||'', size:20, font:'Calibri' })] }); }
+        function divider() { return new D.Paragraph({ border:{ bottom:{ style:D.BorderStyle.SINGLE, size:4, color:'2d6a4f' } }, spacing:{after:80} }); }
+
+        // Build lender table rows
+        var lenderHdrRow = new D.TableRow({ children:[
+          ['#','Creditor','Type','Original','Outstanding','Monthly','Status','Maturity','Remarks']
+            .map(function(h){ return new D.TableCell({ borders:borders, shading:{fill:'F0F5F0'}, margins:mg, children:[new D.Paragraph({ children:[new D.TextRun({ text:h, bold:true, size:18, font:'Calibri' })] })] }); })
+        ].flat() });
+
+        var lenderRows = lenders.map(function(l) {
+          return new D.TableRow({ children:[
+            [l.no,l.creditor,l.type,l.balance,l.outstanding,l.monthly,l.status,l.maturity,l.remarks]
+              .map(function(v){ return new D.TableCell({ borders:borders, margins:mg, children:[new D.Paragraph({ children:[new D.TextRun({ text:String(v), size:18, font:'Calibri' })] })] }); })
+          ].flat() });
+        });
+
+        var doc = new D.Document({
+          sections:[{
+            properties:{ page:{ size:{width:12240,height:15840}, margin:{top:900,right:900,bottom:900,left:900} } },
+            children:[
+              new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{after:40}, children:[new D.TextRun({ text:'RURAL BANK OF CALBAYOG CITY, INC.', bold:true, size:32, font:'Calibri', color:'071a0e' })] }),
+              new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{after:40}, children:[new D.TextRun({ text:'Credit Background Findings Report', size:26, font:'Calibri', color:'1a5c35' })] }),
+              new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{after:60}, children:[new D.TextRun({ text:'82 T. Bugallon St., Brgy. Central, Calbayog City, W. Samar 6710  |  BSP Lic: RB-0567', size:18, font:'Calibri', color:'666666' })] }),
+              new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{after:80}, children:[new D.TextRun({ text:'CONFIDENTIAL  |  Printed: '+date, size:18, font:'Calibri', color:'999999', italics:true })] }),
+              divider(),
+              hdr('1','Client Information'),
+              new D.Table({ width:{size:9360,type:D.WidthType.DXA}, rows:[
+                row2('Borrower Name', borrower),
+                row2('Reference No.', refNo),
+                row2('Date of Investigation', dateCheck),
+                row2('Investigator / Encoder', investigator),
+                row2('Branch / Unit', branch),
+                row2('Client Type', clientType),
+              ]}),
+              new D.Paragraph({ spacing:{after:120} }),
+              hdr('2','Creditor / Lender Obligations'),
+              new D.Table({ width:{size:9360,type:D.WidthType.DXA}, rows:[lenderHdrRow].concat(lenderRows) }),
+              new D.Paragraph({ spacing:{after:120} }),
+              hdr('3','Overall Credit Background Summary'),
+              para(summary || '—'),
+              new D.Paragraph({ spacing:{after:120} }),
+              hdr('4','General Remarks / Findings'),
+              para(remarks || '—'),
+              new D.Paragraph({ spacing:{before:400} }),
+              divider(),
+              new D.Paragraph({ spacing:{after:600}, children:[new D.TextRun({ text:'Prepared by: '+investigator+'   |   Date: '+dateCheck, size:20, font:'Calibri' })] }),
+              new D.Table({ width:{size:9360,type:D.WidthType.DXA}, rows:[
+                new D.TableRow({ children:[
+                  new D.TableCell({ borders:{top:brd,bottom:{style:D.BorderStyle.NONE},left:{style:D.BorderStyle.NONE},right:{style:D.BorderStyle.NONE}}, width:{size:3120,type:D.WidthType.DXA}, children:[new D.Paragraph({ children:[new D.TextRun({ text:'Investigator / Encoder', bold:true, size:18, font:'Calibri', color:'444444' })] })] }),
+                  new D.TableCell({ borders:{top:brd,bottom:{style:D.BorderStyle.NONE},left:{style:D.BorderStyle.NONE},right:{style:D.BorderStyle.NONE}}, width:{size:3120,type:D.WidthType.DXA}, children:[new D.Paragraph({ children:[new D.TextRun({ text:'Credit Evaluation Head', bold:true, size:18, font:'Calibri', color:'444444' })] })] }),
+                  new D.TableCell({ borders:{top:brd,bottom:{style:D.BorderStyle.NONE},left:{style:D.BorderStyle.NONE},right:{style:D.BorderStyle.NONE}}, width:{size:3120,type:D.WidthType.DXA}, children:[new D.Paragraph({ children:[new D.TextRun({ text:'President & CEO', bold:true, size:18, font:'Calibri', color:'444444' })] })] }),
+                ]})
+              ]}),
+              new D.Paragraph({ alignment:D.AlignmentType.CENTER, spacing:{before:200}, children:[new D.TextRun({ text:'CONFIDENTIAL — For internal use only — Rural Bank of Calbayog City, Inc.', size:16, font:'Calibri', color:'999999', italics:true })] }),
+            ]
+          }]
+        });
+
+        var wordBlob = await D.Packer.toBlob(doc);
+        saveAs(wordBlob, fn + '.docx');
+
+        // ── Upload Word to Drive ──────────────────────────────────────────────
+        if (doDrive && appCode && appCode !== 'UNKNOWN') {
+          prog.textContent = '⏳ Uploading Word doc to Drive...';
+          await cbfUploadToDrive(wordBlob, fn + '.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', appCode, clientName);
+        }
+      }
+
+      prog.textContent = '✅ Report generated successfully!';
+      prog.style.color = '#1a8a42';
+      btn.textContent  = '✅ Done';
+      setTimeout(function(){ hideCBFReportModal(); }, 2000);
+
+    } catch(e) {
+      console.error(e);
+      prog.textContent = '✗ Error: ' + e.message;
+      prog.style.color = '#dc2626';
+      btn.disabled = false;
+      btn.textContent = '📋 Try Again';
+    }
+  }
+
+  // ── Upload file blob to Google Drive via Apps Script ─────────────────────────
+  async function cbfUploadToDrive(blob, fileName, mimeType, appCode, clientName) {
+    return new Promise(function(resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = async function(e) {
+        var base64 = e.target.result.split(',')[1];
+        try {
+          var resp = await fetch(CBF_SHEET_URL, {
+            method: 'POST',
+            redirect: 'follow',
+            body: JSON.stringify({
+              __action:   'uploadFileToDrive',
+              appCode:    appCode,
+              clientName: clientName,
+              fileName:   fileName,
+              mimeType:   mimeType,
+              fileData:   base64
+            })
+          });
+          var raw = await resp.text();
+          var result;
+          try { result = JSON.parse(raw); } catch(e) { result = { result:'error', message:'Non-JSON response' }; }
+          if (result.result === 'success') {
+            console.log('Uploaded to Drive:', result.fileUrl);
+            resolve(result);
+          } else {
+            console.warn('Drive upload warning:', result.message);
+            resolve(result);
+          }
+        } catch(err) {
+          console.error('Drive upload error:', err);
+          resolve({ result:'error', message:err.message });
+        }
+      };
+      reader.readAsDataURL(blob);
+    });
+  }
   </script>
 </body>
 
