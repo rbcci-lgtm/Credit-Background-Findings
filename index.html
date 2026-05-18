@@ -1548,36 +1548,36 @@
     <div class="fpn">
       <div class="fr">
         <div class="ff w100"><span class="fl">Borrower Name</span>
-          <div class="fb" contenteditable="true"></div>
+          <div class="fb" contenteditable="true" id="cbfBorrowerName"></div>
         </div>
       </div>
       <div class="fr c2">
         <div class="ff"><span class="fl">Application / Reference Number</span>
-          <div class="fb" contenteditable="true"></div>
+          <div class="fb" contenteditable="true" id="cbfRefNo"></div>
         </div>
         <div class="ff"><span class="fl">Date of Background Checking</span>
-          <div class="fb" contenteditable="true"></div>
+          <div class="fb" contenteditable="true" id="cbfDateCheck"></div>
         </div>
       </div>
       <div class="fr c2">
         <div class="ff"><span class="fl">Investigator / Encoder Name</span>
-          <div class="fb" contenteditable="true"></div>
+          <div class="fb" contenteditable="true" id="cbfInvestigator"></div>
         </div>
         <div class="ff"><span class="fl">Branch / Unit</span>
-          <div class="fb" contenteditable="true"></div>
+          <div class="fb" contenteditable="true" id="cbfBranch"></div>
         </div>
       </div>
       <div class="fr c2">
         <div class="ff"><span class="fl">Account / Client Type</span>
-          <div class="fb" contenteditable="true"></div>
+          <div class="fb" contenteditable="true" id="cbfClientType"></div>
         </div>
         <div class="ff"><span class="fl">Overall Credit Background Summary</span>
-          <div class="fb" contenteditable="true"></div>
+          <div class="fb" contenteditable="true" id="cbfSummary"></div>
         </div>
       </div>
       <div class="fr">
         <div class="ff w100"><span class="fl">General Remarks / Findings</span>
-          <div class="fb fb-tall" contenteditable="true"></div>
+          <div class="fb fb-tall" contenteditable="true" id="cbfRemarks"></div>
         </div>
       </div>
       <div class="hdr-sig">
@@ -2128,10 +2128,15 @@
     el.style.background = type==='ok' ? '#1a8a42' : type==='err' ? '#b02a1f' : '#1a6fa8';
   }
 
-  // Set contenteditable
+  // Set contenteditable div or input value
   function setCE(id, text) {
     var el = document.getElementById(id);
-    if (el && text) el.textContent = text;
+    if (!el) return;
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.value = text || '';
+    } else {
+      el.textContent = text || '';
+    }
   }
 
   // Fetch from Interview Form
@@ -2241,7 +2246,9 @@
   // Get contenteditable value
   function cbfGet(id) {
     var el = document.getElementById(id);
-    return el ? (el.innerText||el.textContent||'').trim() : '';
+    if (!el) return '';
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') return el.value.trim();
+    return (el.innerText || el.textContent || '').trim();
   }
 
   // Collect lenders from cards
